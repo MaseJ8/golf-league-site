@@ -36,25 +36,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Dynamic tees dropdown =====
   courseSelect.addEventListener("change", () => {
-    teeSelect.innerHTML = '<option value="">Select tee</option>';
+  teeSelect.innerHTML = '<option value="">Select tee</option>';
 
-    if (courseSelect.value === "Other") {
-      manualCourseContainer.style.display = "block";
-      return;
-    } else {
-      manualCourseContainer.style.display = "none";
-    }
+  if (courseSelect.value === "Other") {
+    manualCourseContainer.style.display = "block";
 
-    const selected = courses.find(c => c.name === courseSelect.value);
-    if (selected) {
-      selected.tees.forEach(t => {
-        const opt = document.createElement("option");
-        opt.value = t;
-        opt.textContent = t;
-        teeSelect.appendChild(opt);
-      });
-    }
-  });
+    // When user types a manual tee name, add it as an option
+    const manualTeeInput = document.getElementById("manual-tee-name");
+    manualTeeInput.addEventListener("input", () => {
+      teeSelect.innerHTML = ""; // clear previous options
+      const teeName = manualTeeInput.value.trim();
+      if (teeName) {
+        const option = document.createElement("option");
+        option.value = teeName;
+        option.textContent = teeName;
+        teeSelect.appendChild(option);
+      }
+    });
+
+    return;
+  } else {
+    manualCourseContainer.style.display = "none";
+  }
+
+  const selected = courses.find(c => c.name === courseSelect.value);
+  if (selected) {
+    selected.tees.forEach(t => {
+      const opt = document.createElement("option");
+      opt.value = t;
+      opt.textContent = t;
+      teeSelect.appendChild(opt);
+    });
+  }
+});
 
   // ===== Net score calculation =====
   function calculateNetScore(gross, handicap) {
@@ -110,3 +124,4 @@ document.addEventListener("DOMContentLoaded", () => {
     manualCourseContainer.style.display = "none";
   });
 });
+
