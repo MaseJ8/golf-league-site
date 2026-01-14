@@ -43,6 +43,50 @@ body {
   text-decoration: none;
 }
 
+.score-entry {
+    padding: 50px 10%;
+    background: #f9f9f9;
+    border-radius: 12px;
+    margin: 40px auto;
+    max-width: 800px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.score-entry h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.score-entry form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.score-entry input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#leaderboard {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#leaderboard th, #leaderboard td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#leaderboard tr:hover {
+    background: #e0e0e0;
+}
+
+
 /* HERO */
 .hero {
   height: 90vh;
@@ -144,5 +188,6 @@ footer {
     display:none;
   }
 }
+
 
 
