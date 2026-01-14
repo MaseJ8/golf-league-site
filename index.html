@@ -79,51 +79,58 @@
   </div>
 </section>
 
-<section class="score-entry" id="standings">
+<section class="score-submission">
   <h2>Submit Your Score</h2>
-
   <form id="score-form">
-    <!-- Player Name -->
     <label for="player-name">Player Name:</label>
-    <input type="text" id="player-name" name="player-name" placeholder="Enter your name" required>
+    <input type="text" id="player-name" placeholder="Enter your name" required>
 
-    <!-- Course Selection -->
     <label for="course">Course:</label>
-    <select id="course" name="course" required>
+    <select id="course" required>
       <option value="">Select course</option>
     </select>
 
-    <!-- Tee Box Selection -->
+    <div id="manual-course-container" style="display:none;">
+      <label for="manual-course-name">Course Name:</label>
+      <input type="text" id="manual-course-name" placeholder="Enter course name">
+
+      <label for="manual-tee-name">Tee Name:</label>
+      <input type="text" id="manual-tee-name" placeholder="Enter tee name">
+    </div>
+
     <label for="tee">Tee Box:</label>
-    <select id="tee" name="tee" required>
+    <select id="tee" required>
       <option value="">Select tee</option>
     </select>
 
-    <!-- Gross Score -->
     <label for="score">Gross Score:</label>
-    <input type="number" id="score" name="score" placeholder="Enter your gross score" min="1" required>
+    <input type="number" id="score" min="1" placeholder="Enter gross score" required>
 
-    <!-- Course Handicap -->
-    <label for="handicap">Course Handicap (from GHIN):</label>
-    <input type="number" id="handicap" name="handicap" placeholder="Enter your course handicap" min="0" required>
+    <label for="handicap">GHIN Course Handicap:</label>
+    <input type="number" id="handicap" min="0" placeholder="Enter course handicap" required>
 
-    <button type="submit" class="btn primary">Submit Score</button>
+    <button type="submit">Submit Score</button>
   </form>
+</section>
 
+<section class="leaderboard">
   <h2>Leaderboard</h2>
   <table id="leaderboard">
     <thead>
       <tr>
         <th>Player</th>
-        <th>Course</th>
-        <th>Tee</th>
         <th>Gross</th>
         <th>Net</th>
+        <th>Course</th>
+        <th>Tee</th>
       </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+      <!-- Scores will populate here -->
+    </tbody>
   </table>
 </section>
+
   
 <footer id="register">
   <p>© 2026 Narrow Fairways League</p>
@@ -136,14 +143,13 @@
     { name: "Augusta National", tees: ["Masters", "Member"] }
   ];
 
-  // ===== 2. Select DOM elements =====
+  // ===== 2. DOM elements =====
   const courseSelect = document.getElementById("course");
   const teeSelect = document.getElementById("tee");
   const manualCourseContainer = document.getElementById("manual-course-container");
   const form = document.getElementById("score-form");
   const leaderboardBody = document.querySelector("#leaderboard tbody");
 
-  // Store scores
   let scores = [];
 
   // ===== 3. Render courses dropdown dynamically =====
@@ -157,29 +163,26 @@
       courseSelect.appendChild(option);
     });
 
-    // Add "Other" option for manual entry
     const otherOption = document.createElement("option");
     otherOption.value = "Other";
     otherOption.textContent = "Other (Add new course)";
     courseSelect.appendChild(otherOption);
   }
 
-  // Call initially to populate dropdown
   renderCoursesDropdown();
 
-  // ===== 4. Dynamic tee boxes based on selected course =====
+  // ===== 4. Dynamic tee selection =====
   courseSelect.addEventListener("change", () => {
     teeSelect.innerHTML = '<option value="">Select tee</option>';
 
     if (courseSelect.value === "Other") {
-      manualCourseContainer.style.display = "block"; // show manual inputs
+      manualCourseContainer.style.display = "block";
       return;
     } else {
       manualCourseContainer.style.display = "none";
     }
 
     const selectedCourse = courses.find(c => c.name === courseSelect.value);
-
     if (selectedCourse) {
       selectedCourse.tees.forEach(tee => {
         const option = document.createElement("option");
@@ -190,16 +193,15 @@
     }
   });
 
-  // ===== 5. Function to calculate net score =====
+  // ===== 5. Net score calculation =====
   function calculateNetScore(gross, handicap) {
     return gross - handicap;
   }
 
-  // ===== 6. Form submission handler =====
+  // ===== 6. Form submission =====
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    // Gather input values
     const playerName = document.getElementById("player-name").value.trim();
     const courseName = courseSelect.value === "Other" 
       ? document.getElementById("manual-course-name").value.trim() 
@@ -210,16 +212,13 @@
     const grossScore = parseInt(document.getElementById("score").value);
     const handicap = parseInt(document.getElementById("handicap").value);
 
-    // Validate required fields
     if (!playerName || !courseName || !teeName || !grossScore || handicap === null) {
-      alert("Please fill out all required fields!");
+      alert("Please fill all fields!");
       return;
     }
 
-    // Calculate net score
     const netScore = calculateNetScore(grossScore, handicap);
 
-    // Add score to array
     scores.push({
       player: playerName,
       gross: grossScore,
@@ -245,17 +244,14 @@
       leaderboardBody.appendChild(row);
     });
 
-    // Reset form
     form.reset();
     teeSelect.innerHTML = '<option value="">Select tee</option>';
     manualCourseContainer.style.display = "none";
   });
 </script>
-
-
-
 </body>
 </html>
+
 
 
 
