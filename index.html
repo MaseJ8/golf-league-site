@@ -79,31 +79,33 @@
   </div>
 </section>
 
-<!-- Score Submission Section -->
 <section class="score-entry" id="standings">
   <h2>Submit Your Score</h2>
 
   <form id="score-form">
+    <!-- Player Name -->
     <label for="player-name">Player Name:</label>
     <input type="text" id="player-name" name="player-name" placeholder="Enter your name" required>
 
+    <!-- Course Selection -->
     <label for="course">Course:</label>
     <select id="course" name="course" required>
       <option value="">Select course</option>
     </select>
 
+    <!-- Tee Box Selection -->
     <label for="tee">Tee Box:</label>
     <select id="tee" name="tee" required>
       <option value="">Select tee</option>
     </select>
 
-    <div id="manual-slope-container" style="display:none;">
-      <label for="manual-slope">Slope (if course not in database):</label>
-      <input type="number" id="manual-slope" name="manual-slope" min="60" max="155">
-    </div>
-
+    <!-- Gross Score -->
     <label for="score">Gross Score:</label>
     <input type="number" id="score" name="score" placeholder="Enter your gross score" min="1" required>
+
+    <!-- Course Handicap -->
+    <label for="handicap">Course Handicap (from GHIN):</label>
+    <input type="number" id="handicap" name="handicap" placeholder="Enter your course handicap" min="0" required>
 
     <button type="submit" class="btn primary">Submit Score</button>
   </form>
@@ -124,6 +126,7 @@
 </section>
 
 
+
 <footer id="register">
   <p>© 2026 Narrow Fairways League</p>
 </footer>
@@ -131,7 +134,7 @@
 <script>
 // ===== Course Database =====
 const courses = [
-  { name: "Pebble Beach", tees: { "Blue": 135, "White": 130, "Red": 120 } },
+  { name: "Gold Mountain Cascade", tees: { "Blue": 135, "White": 130, "Red": 120 } },
   { name: "St George GC", tees: { "Blue": 125, "White": 120, "Red": 110 } },
   { name: "Augusta National", tees: { "Masters": 155, "Member": 140 } }
 ];
@@ -239,6 +242,7 @@ form.addEventListener("submit", e => {
 
 </body>
 </html>
+
 
 
 
