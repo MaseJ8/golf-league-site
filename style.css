@@ -164,48 +164,55 @@ body {
 
 /* ===== Score Submission ===== */
 .score-entry {
-    padding: 50px 10%;
-    background: #f9f9f9;
-    border-radius: 12px;
-    margin: 40px auto;
-    max-width: 900px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  padding: 60px 10%;
+  background: #f9f9f9;
 }
 
 .score-entry h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  color: #0b3d0b;
 }
 
 .score-entry form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 30px;
+  display: grid;
+  gap: 15px;
+  margin-bottom: 40px;
 }
 
 .score-entry input,
 .score-entry select {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.score-entry .btn.primary {
+  background: #0b3d0b;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 #leaderboard {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-#leaderboard th, #leaderboard td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+#leaderboard th,
+#leaderboard td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
 }
 
-#leaderboard tr:hover {
-    background: #e0e0e0;
+#leaderboard th {
+  background: #0b3d0b;
+  color: #fff;
 }
+
 
 /* ===== Footer ===== */
 footer {
@@ -233,6 +240,7 @@ footer {
         gap: 10px;
     }
 }
+
 
 
 
