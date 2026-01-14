@@ -12,20 +12,17 @@
 <body>
 
 <nav class="navbar">
-  <div class="logo-brand">
-    <img src="images/NarrowFairwaysLogo.png" alt="League Logo" class="site-logo">
-    <span>Narrow Fairways</span>
-  </div>
+  <div class="logo">Narrow Fairways</div>
   <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Tournaments</a></li>
-    <li><a href="#">Players</a></li>
-    <li><a href="#">Standings</a></li>
-    <li><a href="#">Register</a></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#tournaments">Tournaments</a></li>
+    <li><a href="#players">Players</a></li>
+    <li><a href="#standings">Standings</a></li>
+    <li><a href="#register">Register</a></li>
   </ul>
 </nav>
 
-<header class="hero">
+<header class="hero" id="home">
   <div class="hero-content">
     <h1>2026 Golf Season</h1>
     <p>Compete. Improve. Win.</p>
@@ -46,7 +43,7 @@
     <p>Weeks</p>
   </div>
   <div>
-    <h3>$10,000</h3>
+    <h3>$6000</h3>
     <p>Prize Money</p>
   </div>
   <div>
@@ -55,24 +52,55 @@
   </div>
 </section>
 
-<section class="next-event">
+<section class="next-event" id="tournaments">
   <h2>Next Tournament</h2>
   <div class="event-card">
     <h3>St George, Utah</h3>
-    <p>📅 October 15-18, 2026</p>
-    <p>📍 Coral Canyon, TBD, TBD, TBD</p>
+    <p>📅 October, 2026</p>
+    <p>📍 TBD</p>
     <p>🏌️ Tourney</p>
     <button class="btn primary">Register Now</button>
   </div>
 </section>
-  
-<section class="score-entry">
+
+<section class="features" id="players">
+  <div class="feature">
+    <h3>Live Scores</h3>
+    <p>Track your performance in real time.</p>
+  </div>
+  <div class="feature">
+    <h3>Player Profiles</h3>
+    <p>Stats, history, and rankings.</p>
+  </div>
+  <div class="feature">
+    <h3>Season Standings</h3>
+    <p>Follow the leaderboard all year.</p>
+  </div>
+</section>
+
+<!-- Score Submission Section -->
+<section class="score-entry" id="standings">
   <h2>Submit Your Score</h2>
   <form id="score-form">
     <label for="player-name">Player Name:</label>
     <input type="text" id="player-name" name="player-name" required>
 
-    <label for="score">Score:</label>
+    <label for="course">Course:</label>
+    <select id="course" name="course">
+      <option value="">Select course</option>
+    </select>
+
+    <label for="tee">Tee Box:</label>
+    <select id="tee" name="tee">
+      <option value="">Select tee</option>
+    </select>
+
+    <div id="manual-slope-container" style="display:none;">
+      <label for="manual-slope">Slope (if not in database):</label>
+      <input type="number" id="manual-slope" name="manual-slope" min="60" max="155">
+    </div>
+
+    <label for="score">Gross Score:</label>
     <input type="number" id="score" name="score" required min="1">
 
     <button type="submit" class="btn primary">Submit Score</button>
@@ -83,78 +111,113 @@
     <thead>
       <tr>
         <th>Player</th>
-        <th>Score</th>
+        <th>Gross</th>
+        <th>Net</th>
+        <th>Course</th>
+        <th>Tee</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- Scores will appear here -->
-    </tbody>
+    <tbody></tbody>
   </table>
 </section>
 
-<section class="features">
-  <div class="feature">
-    <h3>Live Scores</h3>
-    <p>Track your performance in real time.</p>
-  </div>
-
-  <div class="feature">
-    <h3>Player Profiles</h3>
-    <p>Handicap Index, Bio, and rankings.</p>
-  </div>
-
-  <div class="feature">
-    <h3>Season Standings</h3>
-    <p>Follow the leaderboard all year.</p>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 Fairway League</p>
+<footer id="register">
+  <p>© 2026 Narrow Fairways League</p>
 </footer>
+
 <script>
+// ===== Course Database =====
+const courses = [
+  { name: "Pebble Beach", tees: { "Blue": 135, "White": 130, "Red": 120 } },
+  { name: "St George GC", tees: { "Blue": 125, "White": 120, "Red": 110 } },
+  { name: "Augusta National", tees: { "Masters": 155, "Member": 140 } }
+];
+
+// ===== Player Data =====
+const players = [
+  { name: "Mason Joe", handicap: 5 },
+  { name: "Micah Joe", handicap: 8 },
+  { name: "Kiwi", handicap: 20 }
+];
+
+// ===== Form Elements =====
+const courseSelect = document.getElementById("course");
+const teeSelect = document.getElementById("tee");
+const manualSlopeContainer = document.getElementById("manual-slope-container");
 const form = document.getElementById("score-form");
 const leaderboardBody = document.querySelector("#leaderboard tbody");
 
-// Store scores in an array
 let scores = [];
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
+// Populate courses dropdown
+courses.forEach(c => {
+  const opt = document.createElement("option");
+  opt.value = c.name;
+  opt.textContent = c.name;
+  courseSelect.appendChild(opt);
+});
 
-    const name = document.getElementById("player-name").value;
-    const score = parseInt(document.getElementById("score").value);
-
-    // Add to scores array
-    scores.push({ name, score });
-
-    // Sort leaderboard ascending by score
-    scores.sort((a, b) => a.score - b.score);
-
-    // Clear table
-    leaderboardBody.innerHTML = "";
-
-    // Re-populate leaderboard
-    scores.forEach(player => {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td>${player.name}</td><td>${player.score}</td>`;
-        leaderboardBody.appendChild(row);
+// Update tees when course selected
+courseSelect.addEventListener("change", () => {
+  teeSelect.innerHTML = '<option value="">Select tee</option>';
+  manualSlopeContainer.style.display = "none";
+  
+  const selected = courses.find(c => c.name === courseSelect.value);
+  if (selected) {
+    Object.keys(selected.tees).forEach(tee => {
+      const opt = document.createElement("option");
+      opt.value = tee;
+      opt.textContent = tee;
+      teeSelect.appendChild(opt);
     });
+  } else {
+    manualSlopeContainer.style.display = "block";
+  }
+});
 
-    // Reset form
-    form.reset();
+// NET score calculation
+function calculateNetScore(gross, slope, handicap) {
+  return Math.round(gross - (handicap * slope / 113));
+}
+
+// Handle form submission
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const playerName = document.getElementById("player-name").value;
+  const courseName = courseSelect.value;
+  const teeName = teeSelect.value;
+  const grossScore = parseInt(document.getElementById("score").value);
+
+  const player = players.find(p => p.name === playerName) || { handicap: 0 };
+
+  // Determine slope
+  let slope = 113; // default
+  const course = courses.find(c => c.name === courseName);
+  if (course && teeName && course.tees[teeName]) {
+    slope = course.tees[teeName];
+  } else {
+    slope = parseInt(document.getElementById("manual-slope").value) || 113;
+  }
+
+  const netScore = calculateNetScore(grossScore, slope, player.handicap);
+
+  scores.push({ player: playerName, gross: grossScore, net: netScore, course: courseName, tee: teeName });
+
+  scores.sort((a,b) => a.net - b.net);
+
+  leaderboardBody.innerHTML = "";
+  scores.forEach(s => {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${s.player}</td><td>${s.gross}</td><td>${s.net}</td><td>${s.course}</td><td>${s.tee}</td>`;
+    leaderboardBody.appendChild(row);
+  });
+
+  form.reset();
+  teeSelect.innerHTML = '<option value="">Select tee</option>';
+  manualSlopeContainer.style.display = "none";
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
