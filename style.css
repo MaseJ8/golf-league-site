@@ -1,0 +1,140 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* NAV */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 8%;
+  background: #0a3d2c;
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  height: 90vh;
+  background: linear-gradient(
+    rgba(0,0,0,.4),
+    rgba(0,0,0,.6)
+  ),
+  url("https://images.unsplash.com/photo-1531415074968-036ba1b575da") center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  text-align: center;
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero-buttons {
+  margin-top: 25px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.primary {
+  background: #1abc9c;
+  color: #000;
+}
+
+.secondary {
+  border: 2px solid #fff;
+  color: #fff;
+  margin-left: 10px;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  padding: 60px 10%;
+  text-align: center;
+  background: #fff;
+}
+
+.stats h3 {
+  font-size: 2rem;
+  color: #1abc9c;
+}
+
+/* EVENT */
+.next-event {
+  padding: 80px 10%;
+}
+
+.event-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.1);
+}
+
+/* FEATURES */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 25px;
+  padding: 80px 10%;
+  background: #eef7f4;
+}
+
+.feature {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0a3d2c;
+  color: #fff;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .navbar ul{
+    display:none;
+  }
+}
