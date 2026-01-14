@@ -124,102 +124,140 @@
     <tbody></tbody>
   </table>
 </section>
-
-
-
+  
 <footer id="register">
   <p>© 2026 Narrow Fairways League</p>
 </footer>
 <script>
-// ===== Course Database =====
-const courses = [
-  { name: "Gold Mountain Cascase", tees: ["Blue", "White"] },
-  { name: "Canterwood", tees: ["Blue", "White", "Red"] },
-  { name: "Kitsap G&CC", tees: ["Masters", "Member"] },
-  { name: "Gold Mountain Olympic", tees: ["Blue", "White"] }
-];
+  <script>
+  // ===== 1. Courses database =====
+  const courses = [
+    { name: "Pebble Beach", tees: ["Blue", "White", "Red"] },
+    { name: "St George GC", tees: ["Blue", "White", "Red"] },
+    { name: "Augusta National", tees: ["Masters", "Member"] }
+  ];
 
-// ===== Player Database (optional for autocomplete/validation) =====
-const players = ["Mason Joe", "Micah Joe", "Kiwi"]; 
+  // ===== 2. Select DOM elements =====
+  const courseSelect = document.getElementById("course");
+  const teeSelect = document.getElementById("tee");
+  const manualCourseContainer = document.getElementById("manual-course-container");
+  const form = document.getElementById("score-form");
+  const leaderboardBody = document.querySelector("#leaderboard tbody");
 
-// Form elements
-const courseSelect = document.getElementById("course");
-const teeSelect = document.getElementById("tee");
-const form = document.getElementById("score-form");
-const leaderboardBody = document.querySelector("#leaderboard tbody");
+  // Store scores
+  let scores = [];
 
-let scores = [];
+  // ===== 3. Render courses dropdown dynamically =====
+  function renderCoursesDropdown() {
+    courseSelect.innerHTML = '<option value="">Select course</option>';
 
-// Populate courses dropdown
-courses.forEach(c => {
-  const option = document.createElement("option");
-  option.value = c.name;
-  option.textContent = c.name;
-  courseSelect.appendChild(option);
-});
-
-// Update tees when course changes
-courseSelect.addEventListener("change", () => {
-  teeSelect.innerHTML = '<option value="">Select tee</option>';
-  const selectedCourse = courses.find(c => c.name === courseSelect.value);
-  if (selectedCourse) {
-    selectedCourse.tees.forEach(tee => {
-      const opt = document.createElement("option");
-      opt.value = tee;
-      opt.textContent = tee;
-      teeSelect.appendChild(opt);
+    courses.forEach(c => {
+      const option = document.createElement("option");
+      option.value = c.name;
+      option.textContent = c.name;
+      courseSelect.appendChild(option);
     });
-  }
-});
 
-// Calculate Net Score (Gross - Course Handicap)
-function calculateNetScore(gross, handicap) {
-  return gross - handicap;
-}
-
-// Form submission
-form.addEventListener("submit", e => {
-  e.preventDefault();
-
-  const playerName = document.getElementById("player-name").value.trim();
-  const courseName = courseSelect.value;
-  const teeName = teeSelect.value;
-  const grossScore = parseInt(document.getElementById("score").value);
-  const handicap = parseInt(document.getElementById("handicap").value);
-
-  if (!playerName || !courseName || !teeName || !grossScore || handicap === null) {
-    alert("Please fill all required fields!");
-    return;
+    // Add "Other" option for manual entry
+    const otherOption = document.createElement("option");
+    otherOption.value = "Other";
+    otherOption.textContent = "Other (Add new course)";
+    courseSelect.appendChild(otherOption);
   }
 
-  const netScore = calculateNetScore(grossScore, handicap);
+  // Call initially to populate dropdown
+  renderCoursesDropdown();
 
-  scores.push({
-    player: playerName,
-    gross: grossScore,
-    net: netScore,
-    course: courseName,
-    tee: teeName
+  // ===== 4. Dynamic tee boxes based on selected course =====
+  courseSelect.addEventListener("change", () => {
+    teeSelect.innerHTML = '<option value="">Select tee</option>';
+
+    if (courseSelect.value === "Other") {
+      manualCourseContainer.style.display = "block"; // show manual inputs
+      return;
+    } else {
+      manualCourseContainer.style.display = "none";
+    }
+
+    const selectedCourse = courses.find(c => c.name === courseSelect.value);
+
+    if (selectedCourse) {
+      selectedCourse.tees.forEach(tee => {
+        const option = document.createElement("option");
+        option.value = tee;
+        option.textContent = tee;
+        teeSelect.appendChild(option);
+      });
+    }
   });
 
-  // Sort leaderboard by Net Score ascending
-  scores.sort((a, b) => a.net - b.net);
+  // ===== 5. Function to calculate net score =====
+  function calculateNetScore(gross, handicap) {
+    return gross - handicap;
+  }
 
-  // Render leaderboard
-  leaderboardBody.innerHTML = "";
-  scores.forEach(s => {
-    const row = document.createElement("tr");
-    row.innerHTML = `<td>${s.player}</td><td>${s.gross}</td><td>${s.net}</td><td>${s.course}</td><td>${s.tee}</td>`;
-    leaderboardBody.appendChild(row);
+  // ===== 6. Form submission handler =====
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    // Gather input values
+    const playerName = document.getElementById("player-name").value.trim();
+    const courseName = courseSelect.value === "Other" 
+      ? document.getElementById("manual-course-name").value.trim() 
+      : courseSelect.value;
+    const teeName = courseSelect.value === "Other" 
+      ? document.getElementById("manual-tee-name").value.trim() 
+      : teeSelect.value;
+    const grossScore = parseInt(document.getElementById("score").value);
+    const handicap = parseInt(document.getElementById("handicap").value);
+
+    // Validate required fields
+    if (!playerName || !courseName || !teeName || !grossScore || handicap === null) {
+      alert("Please fill out all required fields!");
+      return;
+    }
+
+    // Calculate net score
+    const netScore = calculateNetScore(grossScore, handicap);
+
+    // Add score to array
+    scores.push({
+      player: playerName,
+      gross: grossScore,
+      net: netScore,
+      course: courseName,
+      tee: teeName
+    });
+
+    // Sort leaderboard by net score ascending
+    scores.sort((a, b) => a.net - b.net);
+
+    // Render leaderboard
+    leaderboardBody.innerHTML = "";
+    scores.forEach(s => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${s.player}</td>
+        <td>${s.gross}</td>
+        <td>${s.net}</td>
+        <td>${s.course}</td>
+        <td>${s.tee}</td>
+      `;
+      leaderboardBody.appendChild(row);
+    });
+
+    // Reset form
+    form.reset();
+    teeSelect.innerHTML = '<option value="">Select tee</option>';
+    manualCourseContainer.style.display = "none";
   });
-
-  form.reset();
-  teeSelect.innerHTML = '<option value="">Select tee</option>';
-});
 </script>
+
+
 
 </body>
 </html>
+
 
 
 
