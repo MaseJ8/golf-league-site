@@ -1,54 +1,174 @@
+/* ===== Global Styles ===== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background: #f5f5f5;
-  color: #222;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f7f7f7;
 }
 
-/* NAV */
+/* ===== Navbar ===== */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 8%;
-  background: #0a3d2c;
-  position: sticky;
-  top: 0;
-}
-.logo-brand {
-  display:flex;
-  align-items:center;
-  gap: 12px;
-  font-weight: 600;
-  font-size: 1.3rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #ffffff;
+    padding: 15px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
 }
 
-.site-logo {
-  width: 42px;
-  height: auto;
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f7a1f;
 }
-  
+
 .navbar ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
+    list-style: none;
+    display: flex;
+    gap: 25px;
 }
 
-.navbar a {
-  color: #fff;
-  text-decoration: none;
+.navbar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
+.navbar ul li a:hover {
+    color: #1f7a1f;
+}
+
+/* ===== Hero ===== */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #1f7a1f, #4caf50);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.hero-buttons a {
+    text-decoration: none;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.hero-buttons a.primary {
+    background: #ffffff;
+    color: #1f7a1f;
+}
+
+.hero-buttons a.primary:hover {
+    background: #e0e0e0;
+}
+
+.hero-buttons a.secondary {
+    background: #1f7a1f;
+    color: #ffffff;
+}
+
+.hero-buttons a.secondary:hover {
+    background: #145214;
+}
+
+/* ===== Stats Section ===== */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 10%;
+    background: #e8f5e9;
+    text-align: center;
+}
+
+.stats h3 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+/* ===== Event Card ===== */
+.next-event {
+    padding: 50px 10%;
+}
+
+.event-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.event-card h3 {
+    margin-bottom: 10px;
+}
+
+.event-card button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #1f7a1f;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.event-card button:hover {
+    background: #145214;
+}
+
+/* ===== Features Section ===== */
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 50px 10%;
+    gap: 20px;
+}
+
+.feature {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    flex: 1 1 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* ===== Score Submission ===== */
 .score-entry {
     padding: 50px 10%;
     background: #f9f9f9;
     border-radius: 12px;
     margin: 40px auto;
-    max-width: 800px;
+    max-width: 900px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
@@ -64,7 +184,8 @@ body {
     margin-bottom: 30px;
 }
 
-.score-entry input {
+.score-entry input,
+.score-entry select {
     padding: 10px;
     font-size: 1rem;
     border-radius: 6px;
@@ -86,108 +207,29 @@ body {
     background: #e0e0e0;
 }
 
-
-/* HERO */
-.hero {
-  height: 90vh;
-  background: linear-gradient(
-    rgba(0,0,0,.4),
-    rgba(0,0,0,.6)
-  ),
-  url("https://images.unsplash.com/photo-1531415074968-036ba1b575da") center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-content {
-  text-align: center;
-  color: #fff;
-}
-
-.hero h1 {
-  font-size: 3rem;
-}
-
-.hero-buttons {
-  margin-top: 25px;
-}
-
-/* BUTTONS */
-.btn {
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.primary {
-  background: #1abc9c;
-  color: #000;
-}
-
-.secondary {
-  border: 2px solid #fff;
-  color: #fff;
-  margin-left: 10px;
-}
-
-/* STATS */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-  padding: 60px 10%;
-  text-align: center;
-  background: #fff;
-}
-
-.stats h3 {
-  font-size: 2rem;
-  color: #1abc9c;
-}
-
-/* EVENT */
-.next-event {
-  padding: 80px 10%;
-}
-
-.event-card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,.1);
-}
-
-/* FEATURES */
-.features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 25px;
-  padding: 80px 10%;
-  background: #eef7f4;
-}
-
-.feature {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-/* FOOTER */
+/* ===== Footer ===== */
 footer {
-  text-align: center;
-  padding: 20px;
-  background: #0a3d2c;
-  color: #fff;
+    text-align: center;
+    padding: 25px;
+    background: #1f7a1f;
+    color: white;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-  .navbar ul{
-    display:none;
-  }
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .stats, .features {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
-
-
-
