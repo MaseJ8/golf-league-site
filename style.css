@@ -233,3 +233,64 @@ footer {
         gap: 10px;
     }
 }
+
+/* ===== Dark Mode Styles ===== */
+body.dark {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .navbar {
+    background: #1f1f1f;
+    box-shadow: 0 2px 10px rgba(255,255,255,0.05);
+}
+
+body.dark .navbar ul li a {
+    color: #e0e0e0;
+}
+
+body.dark .navbar ul li a:hover {
+    color: #90ee90; /* bright green accent */
+}
+
+body.dark .hero {
+    background: linear-gradient(135deg, #0b3d0b, #145214);
+    color: #e0e0e0;
+}
+
+body.dark .hero-buttons a.primary {
+    background: #e0e0e0;
+    color: #0b3d0b;
+}
+
+body.dark .hero-buttons a.primary:hover {
+    background: #cfcfcf;
+}
+
+body.dark .hero-buttons a.secondary {
+    background: #0b3d0b;
+    color: #e0e0e0;
+}
+
+body.dark .stats {
+    background: #1f1f1f;
+}
+
+body.dark .event-card,
+body.dark .feature,
+body.dark .score-entry {
+    background: #1f1f1f;
+    color: #e0e0e0;
+    box-shadow: 0 5px 15px rgba(255,255,255,0.05);
+}
+
+body.dark #leaderboard tr:hover {
+    background: #333333;
+}
+
+body.dark footer {
+    background: #0b3d0b;
+    color: #e0e0e0;
+}
+
+
