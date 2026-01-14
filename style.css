@@ -32,12 +32,6 @@ body {
   height: auto;
 }
   
-.logo {
-  color: #fff;
-  font-weight: 600;
-  font-size: 1.2rem;
-}
-
 .navbar ul {
   display: flex;
   gap: 20px;
@@ -150,4 +144,5 @@ footer {
     display:none;
   }
 }
+
 
