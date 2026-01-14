@@ -130,26 +130,20 @@
 <footer id="register">
   <p>© 2026 Narrow Fairways League</p>
 </footer>
-
 <script>
 // ===== Course Database =====
 const courses = [
-  { name: "Gold Mountain Cascade", tees: { "Blue": 135, "White": 130, "Red": 120 } },
-  { name: "St George GC", tees: { "Blue": 125, "White": 120, "Red": 110 } },
-  { name: "Augusta National", tees: { "Masters": 155, "Member": 140 } }
+  { name: "Pebble Beach", tees: ["Blue", "White", "Red"] },
+  { name: "St George GC", tees: ["Blue", "White", "Red"] },
+  { name: "Augusta National", tees: ["Masters", "Member"] }
 ];
 
-// ===== Player Database =====
-const players = [
-  { name: "Mason Joe", handicap: 5 },
-  { name: "Micah Joe", handicap: 8 },
-  { name: "Kiwi", handicap: 20 }
-];
+// ===== Player Database (optional for autocomplete/validation) =====
+const players = ["Mason Joe", "Micah Joe", "Kiwi"]; 
 
-// ===== Form Elements =====
+// Form elements
 const courseSelect = document.getElementById("course");
 const teeSelect = document.getElementById("tee");
-const manualSlopeContainer = document.getElementById("manual-slope-container");
 const form = document.getElementById("score-form");
 const leaderboardBody = document.querySelector("#leaderboard tbody");
 
@@ -166,27 +160,23 @@ courses.forEach(c => {
 // Update tees when course changes
 courseSelect.addEventListener("change", () => {
   teeSelect.innerHTML = '<option value="">Select tee</option>';
-  manualSlopeContainer.style.display = "none";
-
-  const selected = courses.find(c => c.name === courseSelect.value);
-  if (selected) {
-    Object.keys(selected.tees).forEach(tee => {
+  const selectedCourse = courses.find(c => c.name === courseSelect.value);
+  if (selectedCourse) {
+    selectedCourse.tees.forEach(tee => {
       const opt = document.createElement("option");
       opt.value = tee;
       opt.textContent = tee;
       teeSelect.appendChild(opt);
     });
-  } else {
-    manualSlopeContainer.style.display = "block";
   }
 });
 
-// Calculate NET score
-function calculateNetScore(gross, slope, handicap) {
-  return Math.round(gross - (handicap * slope / 113));
+// Calculate Net Score (Gross - Course Handicap)
+function calculateNetScore(gross, handicap) {
+  return gross - handicap;
 }
 
-// Form submission handler
+// Form submission
 form.addEventListener("submit", e => {
   e.preventDefault();
 
@@ -194,25 +184,14 @@ form.addEventListener("submit", e => {
   const courseName = courseSelect.value;
   const teeName = teeSelect.value;
   const grossScore = parseInt(document.getElementById("score").value);
+  const handicap = parseInt(document.getElementById("handicap").value);
 
-  if (!playerName || !courseName || !teeName || !grossScore) {
+  if (!playerName || !courseName || !teeName || !grossScore || handicap === null) {
     alert("Please fill all required fields!");
     return;
   }
 
-  // Find player handicap
-  const player = players.find(p => p.name.toLowerCase() === playerName.toLowerCase()) || { handicap: 0 };
-
-  // Determine slope
-  let slope = 113;
-  const course = courses.find(c => c.name === courseName);
-  if (course && teeName && course.tees[teeName]) {
-    slope = course.tees[teeName];
-  } else {
-    slope = parseInt(document.getElementById("manual-slope").value) || 113;
-  }
-
-  const netScore = calculateNetScore(grossScore, slope, player.handicap);
+  const netScore = calculateNetScore(grossScore, handicap);
 
   scores.push({
     player: playerName,
@@ -222,7 +201,7 @@ form.addEventListener("submit", e => {
     tee: teeName
   });
 
-  // Sort leaderboard by NET
+  // Sort leaderboard by Net Score ascending
   scores.sort((a, b) => a.net - b.net);
 
   // Render leaderboard
@@ -235,13 +214,12 @@ form.addEventListener("submit", e => {
 
   form.reset();
   teeSelect.innerHTML = '<option value="">Select tee</option>';
-  manualSlopeContainer.style.display = "none";
 });
-
 </script>
 
 </body>
 </html>
+
 
 
 
