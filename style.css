@@ -166,12 +166,17 @@ body {
 .score-submission,
 .leaderboard {
     background: #f5f7f5; /* light, airy greenish tone */
-    padding: 40px 10%;
-    margin: 30px auto;
+    padding: 60px 10%;
+    margin: 50px auto;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+.score-submission form#score-form {
+    margin-top: 20px;
 
 .score-submission h2,
 .leaderboard h2 {
@@ -309,6 +314,7 @@ footer {
         gap: 10px;
     }
 }
+
 
 
 
