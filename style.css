@@ -68,7 +68,7 @@ body {
 
 .hero p {
     font-size: 1.2rem;
-    margin-top: 5px;
+    margin-top: 30px;
 }
 
 .hero-buttons a {
@@ -233,5 +233,6 @@ footer {
         gap: 10px;
     }
 }
+
 
 
