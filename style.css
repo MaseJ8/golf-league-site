@@ -19,7 +19,19 @@ body {
   position: sticky;
   top: 0;
 }
+.logo-brand {
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
 
+.site-logo {
+  width: 42px;
+  height: auto;
+}
+  
 .logo {
   color: #fff;
   font-weight: 600;
@@ -138,3 +150,4 @@ footer {
     display:none;
   }
 }
+
