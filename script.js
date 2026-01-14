@@ -82,40 +82,68 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===== Form submission =====
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  // ===== Form submission =====
+form.addEventListener("submit", e => {
+  e.preventDefault();
 
-    const playerName = document.getElementById("player-name").value.trim();
-    const courseName = courseSelect.value === "Other"
-      ? manualCourseInput.value.trim()
-      : courseSelect.value;
-    const teeName = courseSelect.value === "Other"
-      ? manualTeeInput.value.trim()
-      : teeSelect.value;
-    const grossScore = parseInt(document.getElementById("score").value);
-    const handicap = parseInt(document.getElementById("handicap").value);
+  const playerName = document.getElementById("player-name").value.trim();
+  const courseName = courseSelect.value === "Other"
+    ? manualCourseInput.value.trim()
+    : courseSelect.value;
+  const teeName = courseSelect.value === "Other"
+    ? manualTeeInput.value.trim()
+    : teeSelect.value;
+  const grossScore = parseInt(document.getElementById("score").value);
+  const handicap = parseInt(document.getElementById("handicap").value);
 
-    if (!playerName || !courseName || !teeName || !grossScore || handicap === null) {
-      alert("Please fill all fields!");
-      return;
+  if (!playerName || !courseName || !teeName || !grossScore || handicap === null) {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  // If manual course, add it to courses array if it doesn't already exist
+  if (courseSelect.value === "Other") {
+    // Check if course already exists
+    if (!courses.some(c => c.name === courseName)) {
+      courses.push({ name: courseName, tees: [teeName] });
+      renderCoursesDropdown(); // refresh dropdown
+      courseSelect.value = courseName; // automatically select new course
+      renderTees(courseName); // populate tees for new course
     }
+  }
 
-    // If it’s a new manual course, add it to courses array
-    if (courseSelect.value === "Other") {
-      const tees = teeName ? [teeName] : [];
-      courses.push({ name: courseName, tees });
-      renderCoursesDropdown(); // update dropdown with new course
-    }
+  const netScore = calculateNetScore(grossScore, handicap);
 
-    const netScore = calculateNetScore(grossScore, handicap);
+  scores.push({
+    player: playerName,
+    gross: grossScore,
+    net: netScore,
+    course: courseName,
+    tee: teeName
+  });
 
-    scores.push({
-      player: playerName,
-      gross: grossScore,
-      net: netScore,
-      course: courseName,
-      tee: teeName
-    });
+  // Sort leaderboard by net score
+  scores.sort((a, b) => a.net - b.net);
+
+  // Render leaderboard
+  leaderboardBody.innerHTML = "";
+  scores.forEach(s => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${s.player}</td>
+      <td>${s.gross}</td>
+      <td>${s.net}</td>
+      <td>${s.course}</td>
+      <td>${s.tee}</td>
+    `;
+    leaderboardBody.appendChild(row);
+  });
+
+  // Reset form fields
+  form.reset();
+  teeSelect.innerHTML = '<option value="">Select tee</option>';
+  manualCourseContainer.style.display = "none";
+});
 
     // Sort leaderboard by net score
     scores.sort((a, b) => a.net - b.net);
@@ -140,3 +168,4 @@ document.addEventListener("DOMContentLoaded", () => {
     manualCourseContainer.style.display = "none";
   });
 });
+
