@@ -162,55 +162,124 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-/* ===== Score Submission ===== */
-.score-entry {
-  padding: 60px 10%;
-  background: #f9f9f9;
+/* ===== Form & Section ===== */
+.score-submission,
+.leaderboard {
+    background: #f5f7f5; /* light, airy greenish tone */
+    padding: 40px 10%;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
 }
 
-.score-entry h2 {
-  margin-bottom: 20px;
-  color: #0b3d0b;
+.score-submission h2,
+.leaderboard h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: #2c3e50; /* deep green/blue accent */
+    text-align: center;
 }
 
-.score-entry form {
-  display: grid;
-  gap: 15px;
-  margin-bottom: 40px;
+/* ===== Form Inputs ===== */
+form#score-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-.score-entry input,
-.score-entry select {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+form#score-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #34495e;
 }
 
-.score-entry .btn.primary {
-  background: #0b3d0b;
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+form#score-form input,
+form#score-form select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-#leaderboard {
-  width: 100%;
-  border-collapse: collapse;
+form#score-form input:focus,
+form#score-form select:focus {
+    outline: none;
+    border-color: #27ae60; /* green highlight */
+    box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
 }
 
-#leaderboard th,
-#leaderboard td {
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align: left;
+/* ===== Buttons ===== */
+form#score-form button,
+.hero-buttons .btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-#leaderboard th {
-  background: #0b3d0b;
-  color: #fff;
+form#score-form button {
+    background-color: #27ae60;
+    color: white;
+    grid-column: span 2;
+}
+
+form#score-form button:hover {
+    background-color: #1e8449;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* ===== Leaderboard Table ===== */
+table#leaderboard {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+table#leaderboard th,
+table#leaderboard td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+table#leaderboard th {
+    background-color: #27ae60;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+table#leaderboard tbody tr:nth-child(even) {
+    background-color: #eaf6ed;
+}
+
+table#leaderboard tbody tr:hover {
+    background-color: #d1f0d3;
+    transform: scale(1.01);
+}
+
+/* ===== Manual Course Input ===== */
+#manual-course-container input {
+    margin-top: 4px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    form#score-form {
+        grid-template-columns: 1fr;
+    }
+
+    form#score-form button {
+        grid-column: span 1;
+    }
 }
 
 
@@ -240,6 +309,7 @@ footer {
         gap: 10px;
     }
 }
+
 
 
 
