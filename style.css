@@ -188,22 +188,23 @@ body {
 }
 
 /* ===== Form Inputs ===== */
+/* Score form stacked vertically */
 form#score-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column; /* stack inputs one below another */
+    gap: 20px; /* space between fields */
 }
 
 form#score-form label {
-    display: block;
     margin-bottom: 6px;
     font-weight: 500;
     color: #34495e;
 }
 
 form#score-form input,
-form#score-form select {
-    width: 100%;
+form#score-form select,
+form#score-form button {
+    width: 100%; /* full width for each element */
     padding: 10px 12px;
     border-radius: 8px;
     border: 1px solid #cbd5e1;
@@ -211,12 +212,21 @@ form#score-form select {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-form#score-form input:focus,
-form#score-form select:focus {
-    outline: none;
-    border-color: #27ae60; /* green highlight */
-    box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
+form#score-form button {
+    background-color: #27ae60;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
+
+form#score-form button:hover {
+    background-color: #1e8449;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
 
 /* ===== Buttons ===== */
 form#score-form button,
@@ -315,6 +325,7 @@ footer {
         gap: 10px;
     }
 }
+
 
 
 
