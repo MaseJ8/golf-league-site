@@ -1,4 +1,6 @@
-/* ===== Global Styles ===== */
+/* =========================
+   GLOBAL STYLES
+========================= */
 * {
     margin: 0;
     padding: 0;
@@ -9,16 +11,18 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: #333;
-    padding-top: 80px;
-    background: #e0f2e9;
+    background: #e0f2e9; /* subtle greenish page background */
+    padding-top: 80px; /* space for fixed navbar */
 }
 
-/* ===== Navbar ===== */
+/* =========================
+   NAVBAR
+========================= */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #ffffff;
+    background: white;
     padding: 15px 10%;
     display: flex;
     justify-content: space-between;
@@ -27,10 +31,10 @@ body {
     z-index: 1000;
 }
 
-.navbar .logo {
+.nav-logo {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1f7a1f;
+    color: #27ae60; /* green accent */
 }
 
 .navbar ul {
@@ -47,222 +51,260 @@ body {
 }
 
 .navbar ul li a:hover {
-    color: #1f7a1f;
+    color: #27ae60;
 }
 
-/* ===== Hero ===== */
+/* =========================
+   HERO
+========================= */
 .hero {
-    height: 100vh;
-    background: linear-gradient(135deg, #1f7a1f, #4caf50);
+    height: 80vh;
+    background: linear-gradient(135deg, #27ae60, #1e8449);
     color: white;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 80px;
+    flex-direction: column;
+    padding: 0 20px;
 }
 
 .hero h1 {
     font-size: 3rem;
+    margin-bottom: 10px;
 }
 
 .hero p {
-    font-size: 2.2rem;
-    margin-top: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
 }
 
-.hero-buttons a {
-    text-decoration: none;
+/* Hero buttons */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
     padding: 12px 25px;
-    margin: 30px;
     border-radius: 8px;
+    text-decoration: none;
     font-weight: 600;
-    transition: 0.3s;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.hero-buttons a.primary {
-    background: #ffffff;
-    color: #1f7a1f;
+.hero-buttons .primary {
+    background-color: #27ae60;
+    color: white;
+    border: none;
 }
 
-.hero-buttons a.primary:hover {
-    background: #e0e0e0;
+.hero-buttons .primary:hover {
+    background-color: #1e8449;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39,174,96,0.3);
 }
 
-.hero-buttons a.secondary {
-    background: #1f7a1f;
-    color: #ffffff;
+.hero-buttons .secondary {
+    background-color: white;
+    color: #27ae60;
+    border: 2px solid #27ae60;
 }
 
-.hero-buttons a.secondary:hover {
-    background: #145214;
+.hero-buttons .secondary:hover {
+    background-color: #27ae60;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39,174,96,0.3);
 }
 
-/* ===== Stats Section ===== */
+/* =========================
+   STATS
+========================= */
 .stats {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     padding: 50px 10%;
-    background: #e8f5e9;
+    background: #f5f7f5;
+    margin: 30px 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.stats div {
     text-align: center;
+    margin: 15px;
 }
 
 .stats h3 {
     font-size: 2rem;
-    margin-bottom: 5px;
+    color: #27ae60;
 }
 
-/* ===== Event Card ===== */
+/* =========================
+   NEXT EVENT
+========================= */
 .next-event {
     padding: 50px 10%;
+    text-align: center;
+}
+
+.next-event h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: #2c3e50;
 }
 
 .event-card {
-    background: #ffffff;
-    padding: 20px;
+    background: #f5f7f5;
+    padding: 25px;
     border-radius: 12px;
-    max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin-top: 20px;
+    display: inline-block;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .event-card h3 {
     margin-bottom: 10px;
+    color: #27ae60;
 }
 
-.event-card button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background: #1f7a1f;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
+.event-card p {
+    margin-bottom: 8px;
 }
 
-.event-card button:hover {
-    background: #145214;
-}
-
-/* ===== Features Section ===== */
+/* =========================
+   FEATURES
+========================= */
 .features {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 50px 10%;
-    gap: 20px;
 }
 
 .feature {
-    background: #ffffff;
+    background: #f5f7f5;
     padding: 20px;
     border-radius: 12px;
-    flex: 1 1 250px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    width: 250px;
+    margin: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    text-align: center;
 }
 
-/* ===== Form & Section ===== */
-.score-submission,
-.leaderboard {
-    background: #f5f7f5; /* light, airy greenish tone */
-    padding: 60px 10%;
-    margin: 50px auto;
+.feature h3 {
+    margin-bottom: 10px;
+    color: #27ae60;
+}
+
+/* =========================
+   SCORE SUBMISSION
+========================= */
+.score-submission {
+    background: #f5f7f5;
+    padding: 50px 20px;
+    margin: 40px auto;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    max-width: 900px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.score-submission form#score-form {
-    margin-top: 20px;
 
-.score-submission h2,
-.leaderboard h2 {
+.score-submission h2 {
     font-size: 2rem;
     margin-bottom: 25px;
-    color: #2c3e50; /* deep green/blue accent */
+    color: #2c3e50;
     text-align: center;
 }
 
-/* ===== Form Inputs ===== */
-/* Score form stacked vertically */
+/* Form - stacked vertically */
 form#score-form {
     display: flex;
-    flex-direction: column; /* stack inputs one below another */
-    gap: 20px; /* space between fields */
+    flex-direction: column;
+    gap: 18px;
 }
 
 form#score-form label {
-    margin-bottom: 6px;
     font-weight: 500;
     color: #34495e;
 }
 
 form#score-form input,
-form#score-form select,
-form#score-form button {
-    width: 100%; /* full width for each element */
-    padding: 10px 12px;
+form#score-form select {
+    width: 100%;
+    padding: 10px 14px;
     border-radius: 8px;
     border: 1px solid #cbd5e1;
     font-size: 1rem;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+form#score-form input:focus,
+form#score-form select:focus {
+    outline: none;
+    border-color: #27ae60;
+    box-shadow: 0 0 8px rgba(39,174,96,0.3);
+}
+
 form#score-form button {
+    padding: 12px 0;
     background-color: #27ae60;
     color: white;
     font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-form#score-form button:hover {
-    background-color: #1e8449;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
-}
-
-
-/* ===== Buttons ===== */
-form#score-form button,
-.hero-buttons .btn {
-    padding: 12px 25px;
+    font-size: 1rem;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
-}
-
-form#score-form button {
-    background-color: #27ae60;
-    color: white;
-    grid-column: span 2;
 }
 
 form#score-form button:hover {
     background-color: #1e8449;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+    box-shadow: 0 5px 15px rgba(39,174,96,0.3);
 }
 
-/* ===== Leaderboard Table ===== */
+/* Manual course input */
+#manual-course-container {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#manual-course-container input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+/* =========================
+   LEADERBOARD
+========================= */
+.leaderboard {
+    background: #f5f7f5;
+    padding: 40px 20px;
+    margin: 40px auto;
+    border-radius: 12px;
+    max-width: 800px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
 table#leaderboard {
     width: 100%;
     border-collapse: collapse;
     font-size: 1rem;
+    text-align: center;
 }
 
 table#leaderboard th,
 table#leaderboard td {
     padding: 12px 15px;
-    text-align: center;
     border-bottom: 1px solid #cbd5e1;
 }
 
@@ -270,7 +312,6 @@ table#leaderboard th {
     background-color: #27ae60;
     color: white;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 table#leaderboard tbody tr:nth-child(even) {
@@ -279,58 +320,30 @@ table#leaderboard tbody tr:nth-child(even) {
 
 table#leaderboard tbody tr:hover {
     background-color: #d1f0d3;
-    transform: scale(1.01);
 }
 
-/* ===== Manual Course Input ===== */
-#manual-course-container input {
-    margin-top: 4px;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    form#score-form {
-        grid-template-columns: 1fr;
-    }
-
-    form#score-form button {
-        grid-column: span 1;
-    }
-}
-
-
-/* ===== Footer ===== */
+/* =========================
+   FOOTER
+========================= */
 footer {
     text-align: center;
-    padding: 25px;
-    background: #1f7a1f;
-    color: white;
+    padding: 25px 10%;
+    color: #2c3e50;
+    font-weight: 500;
 }
 
-/* ===== Responsive ===== */
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 768px) {
-    .stats, .features {
+    .stats,
+    .features {
         flex-direction: column;
-        text-align: center;
+        align-items: center;
     }
 
-    .hero-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .navbar ul {
-        flex-direction: column;
-        gap: 10px;
+    .score-submission,
+    .leaderboard {
+        padding: 30px 15px;
     }
 }
-
-
-
-
-
-
-
-
-
