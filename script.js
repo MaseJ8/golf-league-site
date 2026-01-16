@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let scores = [];
 
-  const course = [
+  const courses = [
     { name: "Gold Mountain", tees: ["Blue", "White"] },
     { name: "Kitsap GC", tees: ["Championship", "Member"] },
     { name: "Pebble Beach", tees: ["Blue", "White", "Red"] }
@@ -92,4 +92,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
