@@ -4,12 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const courseSelect = document.getElementById("course");
   const teeSelect = document.getElementById("tee");
-  const manualBox = document.getElementById("manual-course-container");
+  const manualBox = document.getElementById("manual-slope-container");
   const form = document.getElementById("score-form");
   const leaderboardBody = document.querySelector("#leaderboard tbody");
 
   let scores = [];
 
+  // DATABASE
   const courses = [
     { name: "Gold Mountain", tees: ["Blue", "White"] },
     { name: "Kitsap GC", tees: ["Championship", "Member"] },
@@ -92,5 +93,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
-
