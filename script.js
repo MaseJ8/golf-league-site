@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   console.log("JS CONNECTED");
 
   const courseSelect = document.getElementById("course");
-  const teeSelect = document.getElementById("tee");
-  const manualBox = document.getElementById("manual-slope-container");
   const form = document.getElementById("score-form");
   const leaderboardBody = document.querySelector("#leaderboard tbody");
 
@@ -12,90 +9,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== DATABASE =====
   const courses = [
-    { name: "Gold Mountain", tees: ["Blue", "White"] },
-    { name: "Kitsap GC", tees: ["Championship", "Member"] },
-    { name: "Pebble Beach", tees: ["Blue", "White", "Red"] }
+    { name: "Gold Mountain" },
+    { name: "Kitsap GC" },
+    { name: "Pebble Beach" }
   ];
 
-  // ===== Render courses =====
+  // ===== Render Courses Dropdown =====
   function renderCoursesDropdown() {
     courseSelect.innerHTML = `<option value="">Select course</option>`;
-
     courses.forEach(c => {
       const opt = document.createElement("option");
       opt.value = c.name;
       opt.textContent = c.name;
       courseSelect.appendChild(opt);
     });
-
-    const other = document.createElement("option");
-    other.value = "Other";
-    other.textContent = "Other (Add new)";
-    courseSelect.appendChild(other);
   }
 
   renderCoursesDropdown();
 
-  // ===== Tee logic =====
-  courseSelect.addEventListener("change", () => {
-    teeSelect.innerHTML = `<option value="">Select tee</option>`;
-
-    if (courseSelect.value === "Other") {
-      manualBox.style.display = "block";
-      return;
-    } else {
-      manualBox.style.display = "none";
-    }
-
-    const selected = courses.find(c => c.name === courseSelect.value);
-
-    if (selected) {
-      selected.tees.forEach(t => {
-        const opt = document.createElement("option");
-        opt.value = t;
-        opt.textContent = t;
-        teeSelect.appendChild(opt);
-      });
-    }
-  });
-
-  // ===== Submit =====
+  // ===== Submit Form =====
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const player = document.getElementById("player-name").value.trim();
-    const gross = Number(document.getElementById("score").value);
-    const handicap = Number(document.getElementById("handicap").value);
+    const player = document.getElementById("player-name").value;
     const course = courseSelect.value;
-    const tee = teeSelect.value;
+    const gross = +document.getElementById("score").value;
+    const handicap = +document.getElementById("handicap").value;
 
-    if(!player || !course || !tee || !gross || isNaN(handicap)){
-      alert("Please complete all fields");
+    if (!player || !course || isNaN(gross) || isNaN(handicap)) {
+      alert("Please fill all fields correctly");
       return;
     }
 
     const net = gross - handicap;
 
-    scores.push({ player, gross, net, course, tee });
+    scores.push({ player, gross, net, course });
 
-    scores.sort((a,b)=>a.net-b.net);
+    // Sort by net score
+    scores.sort((a, b) => a.net - b.net);
 
+    // Render leaderboard
     leaderboardBody.innerHTML = "";
-    scores.forEach(s=>{
+    scores.forEach(s => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${s.player}</td>
         <td>${s.gross}</td>
         <td>${s.net}</td>
         <td>${s.course}</td>
-        <td>${s.tee}</td>
       `;
       leaderboardBody.appendChild(row);
     });
 
     form.reset();
-    teeSelect.innerHTML = `<option value="">Select tee</option>`;
-    manualBox.style.display = "none";
   });
-
 });
