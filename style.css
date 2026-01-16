@@ -31,7 +31,7 @@ body {
     z-index: 1000;
 }
 
-.nav-logo {
+.logo {
     font-size: 1.5rem;
     font-weight: 600;
     color: #27ae60; /* green accent */
@@ -203,7 +203,7 @@ body {
 /* =========================
    SCORE SUBMISSION
 ========================= */
-.score-submission {
+.score-entry {
     background: #f5f7f5;
     padding: 50px 20px;
     margin: 40px auto;
@@ -215,7 +215,7 @@ body {
     justify-content: center;
 }
 
-.score-submission h2 {
+.score-entry h2 {
     font-size: 2rem;
     margin-bottom: 25px;
     color: #2c3e50;
@@ -270,13 +270,13 @@ form#score-form button:hover {
 }
 
 /* Manual course input */
-#manual-course-container {
+#manual-slope-container {
     display: none;
     flex-direction: column;
     gap: 10px;
 }
 
-#manual-course-container input {
+#manual-slope-container input {
     width: 100%;
     padding: 10px 12px;
     border-radius: 8px;
@@ -347,3 +347,4 @@ footer {
         padding: 30px 15px;
     }
 }
+
