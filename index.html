@@ -79,37 +79,48 @@
   </div>
 </section>
 
-<section class="score-submission">
+<section class="score-entry">
   <h2>Submit Your Score</h2>
   <form id="score-form">
     <label for="player-name">Player Name:</label>
-    <input type="text" id="player-name" placeholder="Enter your name" required>
+    <input type="text" id="player-name" name="player-name" required>
 
     <label for="course">Course:</label>
-    <select id="course" required>
-      <option value="">Select Course</option>
+    <select id="course" name="course">
+      <option value="">Select course</option>
     </select>
 
-    <div id="manual-course-container" style="display:none;">
-      <label for="manual-course-name">Course Name:</label>
-      <input type="text" id="manual-course-name" placeholder="Enter course name">
+    <label for="tee">Tee Box:</label>
+    <select id="tee" name="tee">
+      <option value="">Select tee</option>
+    </select>
 
-      <label for="manual-tee-name">Tee Name:</label>
-      <input type="text" id="manual-tee-name" placeholder="Enter tee name">
+    <div id="manual-slope-container" style="display:none;">
+      <label for="manual-slope">Slope (if not in database):</label>
+      <input type="number" id="manual-slope" name="manual-slope" min="60" max="155">
     </div>
 
-    <label for="tee">Tee Box:</label>
-    <select id="tee" required>  </select>
-
     <label for="score">Gross Score:</label>
-    <input type="number" id="score" min="1" placeholder="Enter gross score" required>
+    <input type="number" id="score" name="score" required min="1">
 
-    <label for="handicap">GHIN Course Handicap:</label>
-    <input type="number" id="handicap" min="0" placeholder="Enter course handicap" required>
-
-    <button type="submit">Submit Score</button>
+    <button type="submit" class="btn primary">Submit Score</button>
   </form>
+
+  <h2>Leaderboard</h2>
+  <table id="leaderboard">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Gross</th>
+        <th>Net</th>
+        <th>Course</th>
+        <th>Tee</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 </section>
+
 
 <section class="leaderboard">
   <h2>Leaderboard</h2>
@@ -136,6 +147,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
