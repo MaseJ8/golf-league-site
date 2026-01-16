@@ -4,11 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Narrow Fairways League</title>
-
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <nav class="navbar">
@@ -18,7 +16,6 @@
     <li><a href="#tournaments">Tournaments</a></li>
     <li><a href="#players">Players</a></li>
     <li><a href="#standings">Standings</a></li>
-    <li><a href="#register">Register</a></li>
   </ul>
 </nav>
 
@@ -26,80 +23,30 @@
   <div class="hero-content">
     <h1>2026 Golf Season</h1>
     <p>Compete. Improve. Win.</p>
-    <div class="hero-buttons">
-      <a class="btn primary">Join League</a>
-      <a class="btn secondary">View Standings</a>
-    </div>
   </div>
 </header>
 
-<section class="stats">
-  <div>
-    <h3>32</h3>
-    <p>Players</p>
-  </div>
-  <div>
-    <h3>12</h3>
-    <p>Weeks</p>
-  </div>
-  <div>
-    <h3>$6000</h3>
-    <p>Prize Money</p>
-  </div>
-  <div>
-    <h3>1</h3>
-    <p>Champion</p>
-  </div>
-</section>
-
-<section class="next-event" id="tournaments">
-  <h2>Next Tournament</h2>
-  <div class="event-card">
-    <h3>St George, Utah</h3>
-    <p>📅 October, 2026</p>
-    <p>📍 TBD</p>
-    <p>🏌️ Tourney</p>
-    <button class="btn primary">Register Now</button>
-  </div>
-</section>
-
-<section class="features" id="players">
-  <div class="feature">
-    <h3>Live Scores</h3>
-    <p>Track your performance in real time.</p>
-  </div>
-  <div class="feature">
-    <h3>Player Profiles</h3>
-    <p>Stats, history, and rankings.</p>
-  </div>
-  <div class="feature">
-    <h3>Season Standings</h3>
-    <p>Follow the leaderboard all year.</p>
-  </div>
-</section>
-
-<!-- Score Submission Section -->
 <section class="score-entry" id="standings">
   <h2>Submit Your Score</h2>
   <form id="score-form">
     <label for="player-name">Player Name:</label>
-    <input type="text" id="player-name" name="player-name" required>
+    <input type="text" id="player-name" required placeholder="Enter your name">
 
     <label for="course">Course:</label>
-    <select id="course" name="course" required>
+    <select id="course" name="course">
       <option value="">Select course</option>
     </select>
 
     <div id="manual-course-container" style="display:none;">
-      <label for="manual-course-name">Enter Course Name:</label>
-      <input type="text" id="manual-course-name" placeholder="New Course Name">
+      <label for="manual-course">Add New Course:</label>
+      <input type="text" id="manual-course" placeholder="Enter course name">
     </div>
 
-    <label for="course-handicap">Course Handicap:</label>
-    <input type="number" id="handicap" name="handicap" required min="0" placeholder="Enter your CH">
+    <label for="handicap">Course Handicap (CH):</label>
+    <input type="number" id="handicap" required min="0" placeholder="Enter your CH">
 
     <label for="score">Gross Score:</label>
-    <input type="number" id="score" name="score" required min="1">
+    <input type="number" id="score" required min="1" placeholder="Enter gross score">
 
     <button type="submit" class="btn primary">Submit Score</button>
   </form>
@@ -118,11 +65,6 @@
   </table>
 </section>
 
-<footer id="register">
-  <p>© 2026 Narrow Fairways League</p>
-</footer>
-
 <script src="script.js"></script>
 </body>
 </html>
-
