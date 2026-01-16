@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let scores = [];
 
-  // DATABASE
+  // ===== DATABASE =====
   const courses = [
     { name: "Gold Mountain", tees: ["Blue", "White"] },
     { name: "Kitsap GC", tees: ["Championship", "Member"] },
@@ -21,10 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderCoursesDropdown() {
     courseSelect.innerHTML = `<option value="">Select course</option>`;
 
-    courses.forEach(course => {
+    courses.forEach(c => {
       const opt = document.createElement("option");
-      opt.value = course.name;
-      opt.textContent = course.name;
+      opt.value = c.name;
+      opt.textContent = c.name;
       courseSelect.appendChild(opt);
     });
 
@@ -63,11 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const player = document.getElementById("player-name").value;
-    const gross = +document.getElementById("score").value;
-    const handicap = +document.getElementById("handicap").value;
+    const player = document.getElementById("player-name").value.trim();
+    const gross = Number(document.getElementById("score").value);
+    const handicap = Number(document.getElementById("handicap").value);
     const course = courseSelect.value;
     const tee = teeSelect.value;
+
+    if(!player || !course || !tee || !gross || isNaN(handicap)){
+      alert("Please complete all fields");
+      return;
+    }
 
     const net = gross - handicap;
 
@@ -90,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.reset();
     teeSelect.innerHTML = `<option value="">Select tee</option>`;
+    manualBox.style.display = "none";
   });
 
 });
