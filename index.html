@@ -90,6 +90,9 @@
       <option value="">Select course</option>
     </select>
 
+    <lable for="course-handicap">Course Handicap:</lable>
+    <input type="number" id="handicap" reguired min="0" placehodler="Enter your CH">
+
     <label for="tee">Tee Box:</label>
     <select id="tee" name="tee">
       <option value="">Select tee</option>
@@ -133,12 +136,6 @@ const courses = [
   { name: "Augusta National", tees: { "Masters": 155, "Member": 140 } }
 ];
 
-// ===== Player Data =====
-const players = [
-  { name: "Mason Joe", handicap: 5 },
-  { name: "Micah Joe", handicap: 8 },
-  { name: "Kiwi", handicap: 20 }
-];
 
 // ===== Form Elements =====
 const courseSelect = document.getElementById("course");
@@ -188,28 +185,45 @@ form.addEventListener("submit", function(e) {
   const courseName = courseSelect.value;
   const teeName = teeSelect.value;
   const grossScore = parseInt(document.getElementById("score").value);
+  const courseHandicap = parseInt(document.getElementById("handicap").value);
 
-  const player = players.find(p => p.name === playerName) || { handicap: 0 };
+  if(!playerName || !courseName || !teeName || !grossScore || isNaN(courseHandicap)){
+    alert("Please fill all fields");
+    return;
+  }
 
   // Determine slope
   let slope = 113; // default
   const course = courses.find(c => c.name === courseName);
+
   if (course && teeName && course.tees[teeName]) {
     slope = course.tees[teeName];
   } else {
     slope = parseInt(document.getElementById("manual-slope").value) || 113;
   }
 
-  const netScore = calculateNetScore(grossScore, slope, player.handicap);
+  const netScore = calculateNetScore(grossScore, slope, courseHandicap);
 
-  scores.push({ player: playerName, gross: grossScore, net: netScore, course: courseName, tee: teeName });
+  scores.push({
+    player: playerName,
+    gross: grossScore,
+    net: netScore,
+    course: courseName,
+    tee: teeName
+  });
 
   scores.sort((a,b) => a.net - b.net);
 
   leaderboardBody.innerHTML = "";
   scores.forEach(s => {
     const row = document.createElement("tr");
-    row.innerHTML = `<td>${s.player}</td><td>${s.gross}</td><td>${s.net}</td><td>${s.course}</td><td>${s.tee}</td>`;
+    row.innerHTML = `
+      <td>${s.player}</td>
+      <td>${s.gross}</td>
+      <td>${s.net}</td>
+      <td>${s.course}</td>
+      <td>${s.tee}</td>
+    `;
     leaderboardBody.appendChild(row);
   });
 
@@ -217,7 +231,9 @@ form.addEventListener("submit", function(e) {
   teeSelect.innerHTML = '<option value="">Select tee</option>';
   manualSlopeContainer.style.display = "none";
 });
+
 </script>
 
 </body>
 </html>
+
