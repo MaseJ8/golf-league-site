@@ -31,8 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
     other.textContent = "Other (Add new)";
     courseSelect.appendChild(other);    
   }
-
+  document.addEventListenser("DOMContentLoaded", () => {
   renderCoursesDropdown();
+  });
 
   // ===== Show manual course input if "Other" selected =====
   courseSelect.addEventListener("change", () => {
@@ -93,3 +94,4 @@ document.addEventListener("DOMContentLoaded", () => {
     form.reset();
   });
 });
+
