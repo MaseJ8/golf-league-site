@@ -86,22 +86,12 @@
     <input type="text" id="player-name" name="player-name" required>
 
     <label for="course">Course:</label>
-    <select id="course" name="course">
+    <select id="course" name="course" required>
       <option value="">Select course</option>
     </select>
 
     <label for="course-handicap">Course Handicap:</label>
-    <input type="number" id="handicap" required min="0" placeholder="Enter your CH">
-
-    <label for="tee">Tee Box:</label>
-    <select id="tee" name="tee">
-      <option value="">Select tee</option>
-    </select>
-
-    <div id="manual-slope-container" style="display:none;">
-      <label for="manual-slope">Slope (if not in database):</label>
-      <input type="number" id="manual-slope" name="manual-slope" min="60" max="155">
-    </div>
+    <input type="number" id="handicap" name="handicap" required min="0" placeholder="Enter your CH">
 
     <label for="score">Gross Score:</label>
     <input type="number" id="score" name="score" required min="1">
@@ -117,7 +107,6 @@
         <th>Gross</th>
         <th>Net</th>
         <th>Course</th>
-        <th>Tee</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -129,9 +118,5 @@
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>
-
-
-
