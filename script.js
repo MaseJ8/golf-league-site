@@ -11,9 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Course Database =====
   let courses = [
-    { name: "Gold Mountain" },
-    { name: "Kitsap GC" },
-    { name: "Pebble Beach" }
+    { name: "Gold Mountain" 
+      par: 72
+    },
+    { name: "Kitsap GC"
+      par: 72 },
+    { name: "Pebble Beach"
+      par: 72 },
+    { name: "Rolling Hills"
+      par 72 },
   ];
 
   // ===== Render courses dropdown =====
