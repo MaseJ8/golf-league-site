@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== Course Database =====
   let courses = [
     { name: "Gold Mountain" 
-      par: 72
+      par: 72,
+      tees: "black","blue","white"
     },
     { name: "Kitsap GC"
       par: 72 },
