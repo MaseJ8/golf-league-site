@@ -100,6 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${s.gross}</td>
         <td>${s.net}</td>
         <td>${s.course}</td>
+        <td>${s.tees}</td>
+        <td>${s.yards}</td>
       `;
       leaderboardBody.appendChild(row);
     });
