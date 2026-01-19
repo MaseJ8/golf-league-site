@@ -12,9 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== Course Database =====
   let courses = [
     { name: "Gold Mountain" 
-      par: 72,
-      tees: "black","blue","white"
-    },
+      par: 72 },
     { name: "Kitsap GC"
       par: 72 },
     { name: "Pebble Beach"
